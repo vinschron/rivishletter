@@ -29,17 +29,18 @@
             position: relative;
         }
 
-        /* LIGHT BACKGROUND PHOTO (Your uploaded image) */
+        /* LIGHT BACKGROUND PHOTO - Mobile Optimized */
         body::after {
             content: '';
             position: fixed;
             inset: 0;
             background-image: url('couple.jpg'); /* Save your image as couple.jpg */
             background-size: cover;
-            background-position: center;
+            /* 'center 30%' ensures your faces don't get cut off on mobile screens */
+            background-position: center 30%; 
             background-repeat: no-repeat;
-            opacity: 0.25; 
-            filter: blur(4px) brightness(1.2);
+            opacity: 0.3; /* Thoda sa badhaya taaki mobile par clear dikhe */
+            filter: blur(3px) brightness(1.2); /* Blur kam kiya taaki photo jhalak acchi lage */
             z-index: 0;
             pointer-events: none;
         }
@@ -353,7 +354,7 @@
             line-height: 1;
         }
 
-        /* ---------- NEW: REVEAL BUTTON & HIDDEN HINDI ---------- */
+        /* ---------- REVEAL BUTTON & HIDDEN HINDI ---------- */
         .reveal-btn-wrapper {
             text-align: center;
             margin-top: 30px;
@@ -449,8 +450,12 @@
             font-weight: 500;
         }
 
-        /* ---------- RESPONSIVE ---------- */
+        /* ---------- PERFECT MOBILE RESPONSIVE ---------- */
         @media (max-width: 520px) {
+            .container {
+                margin: 20px auto;
+                width: 95%; /* Mobile par thoda aur jagah di */
+            }
             .click-text { font-size: 2.3rem; }
             .big-heart { height: 90px; width: 90px; }
             .big-heart:before, .big-heart:after { height: 90px; width: 90px; }
@@ -459,9 +464,12 @@
             .letter-title { font-size: 2.6rem; }
             .content-sanskrit { font-size: 1.02rem; padding: 18px; }
             .content-hindi { font-size: 0.98rem; padding: 16px; }
-            .letter-card { padding: 28px 20px 36px; }
-            .photo-frame { max-width: 200px; }
-            .reveal-btn { font-size: 1rem; padding: 12px 25px; }
+            .letter-card { 
+                padding: 28px 18px 36px; /* Padding kam ki taaki mobile me text ko jagah mile */
+                max-height: 90vh; /* Screen height ka pura use kare */
+            }
+            .photo-frame { max-width: 180px; } /* Photo ko chota kiya taaki screen par fit aaye */
+            .reveal-btn { font-size: 0.95rem; padding: 12px 20px; }
         }
     </style>
 </head>
@@ -778,12 +786,11 @@
                 }, 550);
             };
 
-            // NEW: Reveal Hindi Function
+            // Reveal Hindi Function
             window.revealHindi = function() {
                 const hiddenHindi = document.getElementById('hiddenHindi');
                 const btnWrapper = document.getElementById('revealBtnWrapper');
-                const card = document.getElementById('letterCard');
-
+                
                 // Hide the button smoothly
                 btnWrapper.style.opacity = '0';
                 btnWrapper.style.transform = 'scale(0.8)';
